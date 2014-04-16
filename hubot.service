@@ -1,0 +1,14 @@
+[Unit]
+Description=Hubot chat automaton
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker rm -f hubot
+ExecStart=/usr/bin/docker run --rm --name hubot --volume /media/state/hubot:/media/host hubot
+ExecStop=/usr/bin/docker stop hubot
+
+[Install]
+WantedBy=local.target
+
